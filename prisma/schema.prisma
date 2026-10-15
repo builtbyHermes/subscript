@@ -71,11 +71,29 @@ model Subscription {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
-  plan Plan @relation(fields: [planId], references: [id], onDelete: Restrict)
+  user     User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+  plan     Plan      @relation(fields: [planId], references: [id], onDelete: Restrict)
+  payments Payment[]
 
   @@index([userId])
   @@index([planId])
+  @@index([status])
+}
+
+model Payment {
+  id             String        @id @default(cuid())
+  subscriptionId String
+  amountCents    Int
+  method         PaymentMethod
+  status         PaymentStatus @default(PENDING)
+  reference      String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  reviewedAt     DateTime?
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Restrict)
+
+  @@index([subscriptionId])
   @@index([status])
 }
 
@@ -90,4 +108,15 @@ model Project {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+enum PaymentMethod {
+  SIMULATED
+  MANUAL
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
