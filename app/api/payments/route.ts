@@ -85,7 +85,7 @@ export async function POST(request: Request) {
   }
 
   const body: unknown = await request.json().catch(() => null);
-  const result = createPaymentSchema.safeParse(body);
+  const result = createPaymentSchema.safeParse(body);//check if the format sent meets our expectation
 
   if (!result.success) {
     return NextResponse.json(

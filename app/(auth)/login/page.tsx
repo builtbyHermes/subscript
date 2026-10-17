@@ -7,7 +7,7 @@ import { FormEvent, useState } from "react";
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -28,8 +28,8 @@ export default function LoginPage() {
         throw new Error(payload.error ?? "Unable to sign in.");
       }
 
-      router.push("/dashboard");
-      router.refresh();
+      const destination = payload.user?.role === "ADMIN" ? "/admin" : "/dashboard";
+      router.replace(destination);
     } catch (submitError) {
       setError(
         submitError instanceof Error

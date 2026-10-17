@@ -28,8 +28,7 @@ export default function RegisterPage() {
         throw new Error(payload.error ?? "Unable to create account.");
       }
 
-      router.push("/dashboard");
-      router.refresh();
+      router.replace("/dashboard");
     } catch (submitError) {
       setError(
         submitError instanceof Error

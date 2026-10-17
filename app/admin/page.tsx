@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
 type Plan = {
@@ -95,7 +96,36 @@ export default function AdminPage() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
           <p className="text-sm uppercase tracking-[0.2em] text-cyan-300">Admin</p>
-          <h1 className="mt-2 text-4xl font-black">Plan management</h1>
+          <h1 className="mt-2 text-4xl font-black">Admin dashboard</h1>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link
+              href="/admin"
+              className="rounded-xl border border-cyan-400/40 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition hover:bg-cyan-500/20"
+            >
+              Plan management
+            </Link>
+            <Link
+              href="/admin/payments"
+              className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-medium text-slate-100 transition hover:border-slate-600 hover:bg-slate-800"
+            >
+              Payment review
+            </Link>
+          </div>
+        </div>
+
+        <div className="mb-8 rounded-3xl border border-slate-800 bg-slate-900 p-5">
+          <p className="text-sm text-slate-400">Operations overview</p>
+          <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-200">
+            <span className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1.5">
+              Manage plans
+            </span>
+            <span className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1.5">
+              Review payments
+            </span>
+            <span className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1.5">
+              Monitor subscriptions
+            </span>
+          </div>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
